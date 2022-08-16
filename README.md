@@ -3,8 +3,6 @@
 This package provides you with an analysis of the translation keys used in your Laravel application.
 The analysis helps identify missing and unused keys.
 
-![Alt text](http://www.robinfranssen.be/screenshot0.png "Scan everything")
-
 ## Installation
 
 ```bash
