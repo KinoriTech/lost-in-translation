@@ -99,7 +99,7 @@ class AnalyzeLocale extends Command {
         //Count total files.
         $count = iterator_count($phpFiles);
         //Search for the translation keys in file.
-        $this->info('Searching translationkeys in '. $count .' files');
+        $this->info('Searching translation keys in '. $count .' files');
         $bar = $this->output->createProgressBar($count);
         $bar->start();
         $all = [];

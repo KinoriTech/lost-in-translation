@@ -81,7 +81,9 @@ class Project
     {
         $rows = [];
         foreach ($this->keys as $key => $value) {
-            $rows[] = $value->toRow($this->locales, $missing);
+            if ($value->missingTranslations($this->locales)) {
+                $rows[] = $value->toRow($this->locales, $missing);
+            }
         }
         return $rows;
     }
