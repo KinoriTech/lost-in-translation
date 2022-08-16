@@ -35,7 +35,7 @@ From the command line, run `php artisan locale:scan` to get the result of missin
 ```bash
 $ php artisan locale:scan
 Preparing files
-Looking in /Users/horacio/git/lost-in-translation-wrapper/app and /Users/horacio/git/lost-in-translation-wrapper/resources
+Looking in /git/lost-in-translation-wrapper/app and git/lost-in-translation-wrapper/resources
 Searching translationkeys in 51 files
  51/51 [▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓] 100%
 Found 23 translations.
@@ -78,7 +78,7 @@ The `--table` (`-T`) option can be passed to get the complete list of keys:
 ```bash
 $ php artisan locale:scan -T
 Preparing files
-Looking in /Users/horacio/git/lost-in-translation-wrapper/app and /Users/horacio/git/lost-in-translation-wrapper/resources
+Looking in git/lost-in-translation-wrapper/app and git/lost-in-translation-wrapper/resources
 Searching translationkeys in 51 files
  51/51 [▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓] 100%
 Found 23 translations.
