@@ -1,23 +1,29 @@
 {
-    "name": "robinfranssen/analyzelocale",
+    "name": "kinoritech/lost-in-translation",
     "description": "This scans your laravel project for used locale keys that aren't translated by your locale files.",
     "keywords": ["artisan", "command", "analyze", "translation", "locale"],
     "type": "library",
-    "homepage": "https://github.com/aXent/laravel-analyze-locale",
+    "homepage": "https://github.com/KinoriTech/lost-in-translation",
     "license": "MIT",
     "authors": [
         {
-            "name": "Robin Franssen",
-            "email": "robin@dev-it.be",
-            "homepage": "http://www.dev-it.be"
+            "name": "Horacio Hoyos Rodriguez",
+            "email": "h.hoyos.r@kinori.tech"
         }
     ],
     "require": {
-        "php": ">=5.4.0"
+        "php": ">=8.0"
     },
     "autoload": {
         "psr-4": {
-            "RobinFranssen\\AnalyzeLocale\\": "src/"
+            "KinoriTech\\LostInTranslation\\": "src/"
         }
+    },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "KinoriTech\\LostInTranslation\\Providers\\ServiceProvider"
+      ]
     }
+  }
 }

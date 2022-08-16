@@ -1,44 +1,56 @@
 <?php
-namespace RobinFranssen\AnalyzeLocale\Providers;
+namespace KinoriTech\LostInTranslation\Providers;
 
-use RobinFranssen\AnalyzeLocale\Console\Commands\AllKeys;
-use RobinFranssen\AnalyzeLocale\Console\Commands\AnalyzeLocale;
-use RobinFranssen\AnalyzeLocale\Console\Commands\Invalid;
-use RobinFranssen\AnalyzeLocale\Console\Commands\Untranslated;
+
+use Illuminate\Translation\FileLoader;
+use KinoriTech\LostInTranslation\Console\Commands\AnalyzeLocale;
+use KinoriTech\LostInTranslation\Helpers\Translator;
 
 class ServiceProvider extends \Illuminate\Support\ServiceProvider
 {
     public function register()
     {
-        $this->app['command.locale.scan'] = $this->app->share(
-            function () {
-                return new AnalyzeLocale;
-            }
-        );
-
-        $this->app['command.locale.allkeys'] = $this->app->share(
-            function () {
-                return new AllKeys();
-            }
-        );
-
-        $this->app['command.locale.untranslated'] = $this->app->share(
-            function () {
-                return new Untranslated();
-            }
-        );
-
-        $this->app['command.locale.invalid'] = $this->app->share(
-            function () {
-                return new Invalid();
-            }
-        );
-
         $this->commands([
-            'command.locale.scan',
-            'command.locale.allkeys',
-            'command.locale.untranslated',
-            'command.locale.invalid',
+            AnalyzeLocale::class
         ]);
+
+        $this->registerLoader();
+
+        $this->app->singleton('translator', function ($app) {
+            $loader = $app['translation.loader'];
+
+            // When registering the translator component, we'll need to set the default
+            // locale as well as the fallback locale. So, we'll grab the application
+            // configuration so we can easily get both of these values from there.
+            $locale = $app['config']['app.locale'];
+
+            $trans = new Translator($loader, $locale);
+
+            $trans->setFallback($app['config']['app.fallback_locale']);
+
+            return $trans;
+        });
+    }
+
+    /**
+     * Register the translation line loader.
+     *
+     * @return void
+     */
+    protected function registerLoader()
+    {
+        $this->app->singleton('translation.loader', function ($app) {
+            return new FileLoader($app['files'], $app['path.lang']);
+        });
+    }
+
+    /**
+     * Get the services provided by the provider.
+     *
+     * @return array
+     */
+    public function provides()
+    {
+        return ['translator', 'translation.loader'];
     }
 }
